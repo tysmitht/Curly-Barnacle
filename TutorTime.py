@@ -48,12 +48,13 @@ def home(username=""):
 num_users = 57
 
 @app.route("/about/<username>")
-@app.route('/about')
+@app.route('/about/')
 def about(username=""):
     return render_template('about.html', username = username, users = num_users)
 
+@app.route('/register/<username>', methods = ["GET", "POST"])
 @app.route('/register', methods = ["GET", "POST"])
-def register():
+def register(username=""):
     form = RegistrationForm()
     # new_user = User(form.username.data, form.email.data, form.password.data)
     # username_data = form.username.data
@@ -61,15 +62,16 @@ def register():
         return redirect("/home/"+form.username.data)
         # form.password.data
     
-    return render_template("register.html", form=form)
+    return render_template("register.html", form=form, username = username)
 
+@app.route('/login/<username>', methods = ["GET", "POST"])
 @app.route('/login', methods = ["GET", "POST"])
-def login():
+def login(username=""):
     form = LoginForm()
     # if form.validate_on_submit():
     #     if form.email.data == "admin@blog.com" and form.password.data == "password":
     #         pass
-    return render_template("login.html", form=form)
+    return render_template("login.html", form=form, username=username)
 
 @app.route('/postings')
 def postings():

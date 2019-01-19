@@ -36,11 +36,11 @@
     </head>
     <body>
         <div class="topnav">
-            <a href="/home">Home</a>
-            <a href="/register">Register</a>
-            <a href="/login">Login</a>
-            <a class="active" href="/postings">Tutoring Jobs</a>
-            <a href="/about">About</a>
+            <a href="/home/{{username}}">Home</a>
+            <a href="/register/{{username}}">Register</a>
+            <a href="/login/{{username}}">Login</a>
+            <a class="active" href="/postings/{{username}}">Tutoring Jobs</a>
+            <a href="/about/{{username}}">About</a>
         </div>
         {% for job in listings %}
             <h2>{{job.student}} | {{job.rating}} | {{job.subject}} | {{job.pay}} | {{job.location}}</h2>

@@ -43,13 +43,15 @@
                 <a href="/postings">Tutoring Jobs</a>
                 <a class="active" href="/about"+ {{username}} >About</a>
             </div>
+            <p> teafbusybdv {{username}} fhbwufb</p>
           {% else %}
           <div class="topnav">
-              <a href="/home">Home</a>
+              <a href="/home/{{username}}">Home</a>
               <a href = "">Welcome {{username}}</a>
-              <a href="/postings">Tutoring Jobs</a>
-              <a class="active" href="/about"+ {{username}} >About</a>
+              <a href="/postings/{{username}}">Tutoring Jobs</a>
+              <a class="active" href="/about/{{username}}" >About</a>
           </div>
+          <p>{{username}}</p>
           {% endif %}
     </body>
 </html>

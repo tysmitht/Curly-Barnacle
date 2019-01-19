@@ -45,10 +45,10 @@
         </div>
       {% else %}
       <div class="topnav">
-          <a class="active" href="/home">Home</a>
+          <a class="active" href="/home/{{username}}">Home</a>
           <a href = "">Welcome {{username}}</a>
-          <a href="/postings">Tutoring Jobs</a>
-          <a href="/about/"+ str({{username}}) >About</a>
+          <a href="/postings/{{username}}">Tutoring Jobs</a>
+          <a href="/about/{{username}}" >About</a>
       </div>
       {% endif %}
     </body>
