@@ -39,7 +39,7 @@ listings = [
 @app.route('/')
 @app.route("/home/<username>")
 @app.route('/home', methods = ["GET", "POST"])
-def home(username="Fuck"):
+def home(username=""):
     form = HomeSearch()
     if form.validate_on_submit():
         return redirect("/results")
@@ -47,9 +47,10 @@ def home(username="Fuck"):
 
 num_users = 57
 
+@app.route("/about/<username>")
 @app.route('/about')
-def about():
-    return render_template('about.html', users = num_users)
+def about(username=""):
+    return render_template('about.html', username = username, users = num_users)
 
 @app.route('/register', methods = ["GET", "POST"])
 def register():

@@ -35,12 +35,21 @@
                 </style>
     </head>
     <body>
-        <div class="topnav">
-            <a href="http://127.0.0.1:5000/home">Home</a>
-            <a href="http://127.0.0.1:5000/register">Register</a>
-            <a href="http://127.0.0.1:5000/login">Login</a>
-            <a href="http://127.0.0.1:5000/postings">Tutoring Jobs</a>
-            <a class="active" href="http://127.0.0.1:5000/about">About</a>
-        </div>
+        {% if username == "" %}
+            <div class="topnav">
+                <a href="/home">Home</a>
+                <a href="/register">Register</a>
+                <a href="/login">Login</a>
+                <a href="/postings">Tutoring Jobs</a>
+                <a class="active" href="/about"+ {{username}} >About</a>
+            </div>
+          {% else %}
+          <div class="topnav">
+              <a href="/home">Home</a>
+              <a href = "">Welcome {{username}}</a>
+              <a href="/postings">Tutoring Jobs</a>
+              <a class="active" href="/about"+ {{username}} >About</a>
+          </div>
+          {% endif %}
     </body>
 </html>
