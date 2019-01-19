@@ -14,14 +14,14 @@ listings = [
         "location": "library"
     },
     {
-        "student": "Jake",
+        "student": "Jake ",
         "rating": "***",
         "subject": "CSE260",
         "pay": "$20/hr",
         "location": "Shaw"
     },
     {
-        "student": "Mo",
+        "student": "Mo   ",
         "rating": "***",
         "subject": "CSE320",
         "pay": "$20/hr",
@@ -37,12 +37,13 @@ listings = [
 ]
 
 @app.route('/')
+@app.route("/home/<username>")
 @app.route('/home', methods = ["GET", "POST"])
-def home():
+def home(username="Fuck"):
     form = HomeSearch()
     if form.validate_on_submit():
-        return redirect("http://127.0.0.1:5000/results")
-    return render_template('home.html', form = form, username = "Tyler Smith")
+        return redirect("/results")
+    return render_template('home.html', form = form, username = username)
 
 num_users = 57
 
@@ -56,7 +57,8 @@ def register():
     # new_user = User(form.username.data, form.email.data, form.password.data)
     # username_data = form.username.data
     if form.validate_on_submit():
-        return redirect("http://127.0.0.1:5000/home")
+        return redirect("/home/"+form.username.data)
+        # form.password.data
     
     return render_template("register.html", form=form)
 
@@ -74,5 +76,5 @@ def postings():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0',port='80',threaded=True)
 

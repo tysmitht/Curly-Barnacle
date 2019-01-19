@@ -42,9 +42,9 @@
             <a class="active" href="http://127.0.0.1:5000/postings">Tutoring Jobs</a>
             <a href="http://127.0.0.1:5000/about">About</a>
         </div>
-        {$ for job in listings $}
+        {% for job in listings %}
             <h2>{{job.student}} | {{job.rating}} | {{job.subject}} | {{job.pay}} | {{job.location}}</h2>
-        {$ endfor $}
+        {% endfor %}
 
     </body>
 </html>
