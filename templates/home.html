@@ -51,5 +51,16 @@
           <a href="/about/{{username}}" >About</a>
       </div>
       {% endif %}
+
+      <form method ="POST" action="">
+          {{ form.hidden_tag() }}
+          </br>
+          <fieldset>
+            <legend>
+              Search
+            </legend>
+            {{form.search}}
+          </fieldset>
+          {{form.submit}}
     </body>
 </html>

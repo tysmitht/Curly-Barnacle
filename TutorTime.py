@@ -36,14 +36,35 @@ listings = [
     },
 ]
 
+users = [
+    "Tyler",
+    "Billy",
+    "Mo",
+    "Jake",
+    "Nathan",
+    "John"
+]
+
 @app.route('/')
 @app.route("/home/<username>")
 @app.route('/home', methods = ["GET", "POST"])
 def home(username=""):
     form = HomeSearch()
+    print("we have reached this particular point")
     if form.validate_on_submit():
-        return redirect("/results")
+        print("This particular form was validated")
+        return redirect("/results/"+username+"/"+form.search.data)
     return render_template('home.html', form = form, username = username)
+
+@app.route("/results/<username>/<search>")
+@app.route('/results')
+def results(username="",search=""):
+    found_users = [user for user in users if search in user]
+    print("Hey guess what. it runs")
+    for user in found_users:
+        print(user)
+
+    return render_template('results.html', username = username, searched_users = found_users)
 
 num_users = 57
 
@@ -73,9 +94,10 @@ def login(username=""):
     #         pass
     return render_template("login.html", form=form, username=username)
 
+@app.route('/postings/<username>')
 @app.route('/postings')
-def postings():
-    return render_template("postings.html", listings = listings)
+def postings(username=""):
+    return render_template("postings.html", listings = listings, username=username)
 
 
 if __name__ == '__main__':
