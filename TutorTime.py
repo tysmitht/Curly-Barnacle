@@ -1,56 +1,39 @@
 from flask import Flask, render_template, flash, redirect
 from forms import RegistrationForm, LoginForm, HomeSearch, NewPost
 from Userclasses import Subject, User
+import pickle
+import os
 app = Flask(__name__)
-
-old_data = open("data.txt", "w")
 
 app.config["SECRET_KEY"] = "04217a5cba4ffa9a502cdde6f8b15b43"
 
-listings = [
-    {
-        "student": "Tyler",
-        "rating": "***",
-        "subject": "CSE231",
-        "pay": "$15/hr",
-        "location": "library",
-        "date": "4/14/1998"
-    },
-    {
-        "student": "Jake ",
-        "rating": "***",
-        "subject": "CSE260",
-        "pay": "$20/hr",
-        "location": "Shaw",
-        "date": "4/14/1998"
-    },
-    {
-        "student": "Mo   ",
-        "rating": "***",
-        "subject": "CSE320",
-        "pay": "$20/hr",
-        "location": "Akers",
-        "date": "4/14/1998"
-    },
-    {
-        "student": "Billy",
-        "rating": "***",
-        "subject": "CSE335",
-        "pay": "$35/hr",
-        "location": "Anywhere",
-        "date": "4/14/1998"
-    },
-]
+#print(os.path.exists("user.pickle"))
 
-users = [
-    "Tyler",
-    "Billy",
-    "Mo",
-    "Jake",
-    "Nathan",
-    "John"
-]
+def job_pickle(jobs_l):
+    pickle_out = open("user.pickle","wb")
+    pickle.dump(listings, pickle_out)
+    pickle_out.close()
 
+def people_pickle(people_l):
+    people_out = open("people.pickle","wb")
+    pickle.dump(Users, pickle_out)
+    people_out.close()
+
+if(os.path.exists("people.pickle")==False):
+    Users = [] #create that list 
+else:
+    people_in = open("people.pickle","rb")
+    Users = pickle.load(people_in)
+    people_in.close()
+
+if(os.path.exists("user.pickle")==False):
+    listings = [] #create that list 
+else:
+    list_in = open("user.pickle","rb")
+    listings = pickle.load(list_in)
+    list_in.close()
+
+"""
 data = {
     "name": "tyler",
     "tutor_rating": "*****",
@@ -61,6 +44,7 @@ data = {
     "email": "smit2660@msu.edu",
     "location": "Charlotte"
 }
+"""
 
 @app.route('/')
 @app.route("/home/<username>", methods = ["GET", "POST"])
@@ -95,6 +79,8 @@ def about(username=""):
 def register(username=""):
     form = RegistrationForm()
     if form.validate_on_submit():
+        new_user = [form.username.data, form.email.data, form.password.data, "MSU", [], "**", "*****"]
+        Users.append(new_user)
         return redirect("/home/"+form.username.data)
     return render_template("register.html", form=form, username = username)
 
@@ -110,6 +96,12 @@ def login():
 @app.route('/postings/<username>')
 @app.route('/postings')
 def postings(username=""):
+
+
+    """
+    LISTING NEEDS TO BE LIST OF DICTIONARIES THAT REPRESENT JOB POSTINGS
+    """
+
     return render_template("postings.html", listings = listings, username=username)
 
 @app.route('/profile/<username>/<profilename>')
@@ -131,13 +123,15 @@ def new(username=""):
             "date": form.date.data,
             "additional comments": form.comments.data
         }
+
+        """
+        LISTINGS SHOULD BE
+        """
         listings.append(new_listing)
+        #pickle function
+        job_pickle(listings)
         return redirect("/home/"+username)
     return render_template("new.html", form = form, username = username)
 
-
-
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0',port='80',threaded=True)
-
-old_data.close()
