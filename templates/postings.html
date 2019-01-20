@@ -73,13 +73,13 @@
 
         {% for job in listings %}
             <tr>
-                <td>{{job.student}}</td>
+                <td><a href="/profile/{{job.student}}">{{job.student}}</a></td>
                 <td>{{job.rating}}</td>
                 <td>{{job.subject}}</td>
                 <td>{{job.pay}}</td>
                 <td>{{job.date}}</td>
                 <td>{{job.location}}</td>
-                <td></td>
+                <td>{{job.comments}}</td>
             </tr>
         {% endfor %}
         </table>

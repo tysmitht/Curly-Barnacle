@@ -2,6 +2,7 @@
 <html>
     <head>
         <title></title>
+        <title></title>
         <style>
                 body {
                   margin: 0;
@@ -34,33 +35,21 @@
                 </style>
     </head>
     <body>
-        <div class="topnav">
-            <a href="/home">Home</a>
-            <a href="/register">Register</a>
-            <a class="active" href="/login">Login</a>
-            <a href="/postings">Tutoring Jobs</a>
-            <a href="/about">About</a>
-        </div>
-        <form method ="POST" action="">
-            {{ form.hidden_tag() }}
-            </br>
-            <fieldset>
-                <legend>
-                    Log in
-                </legend>
+      <div class="topnav">
+          <a class="active" href="/home/{{username}}">Home</a>
+          <a href = "">Welcome {{username}}</a>
+          <a href="/postings/{{username}}">Tutoring Jobs</a>
+          <a href="/new/{{username}}">New Job Post</a>
+          <a href="/about/{{username}}" >About</a>
+      </div>
 
-                Username {{form.username()}}
-                </br>
-                Password {{form.password()}}
-                </br>
-                
-            </fieldset>
-            </br>
-            {{form.submit()}}
-        </form>
-        <h6>
-            Need an account? <a href="/register">Register Now!</a>
-        </h6>
-
+    <p>{{data.name}}</p>
+    <p>{{data.tutor_rating}}</p>
+    <p>{{data.student_rating}}</p>
+    <p>{{data.email}}</p>
+    <p>{{data.location}}</p>
+    {% for skill in qualifications %}
+      <p>{{skill}}</p>
+    {% endfor %}
     </body>
 </html>

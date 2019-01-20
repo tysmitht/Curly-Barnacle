@@ -51,6 +51,17 @@ users = [
     "John"
 ]
 
+data = {
+    "name": "tyler",
+    "tutor_rating": "*****",
+    "student_rating": "****",
+    "qualifications": [
+        "CSE231", "CSE232", "CSE260", "MTH132", "MTH234"
+    ],
+    "email": "smit2660@msu.edu",
+    "location": "Charlotte"
+}
+
 @app.route('/')
 @app.route("/home/<username>", methods = ["GET", "POST"])
 @app.route('/home', methods = ["GET", "POST"])
@@ -92,23 +103,24 @@ def register(username=""):
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        if form.email.data == "admin@blog.com" and form.password.data == "password":
-            return redirect("/home/"+username)
-    return render_template("login.html", form=form, username=username)
+        if form.username.data == "admin@blog.com" and form.password.data == "password":
+            return redirect("/home/"+form.username.data)
+    return render_template("login.html", form=form)
 
 @app.route('/postings/<username>')
 @app.route('/postings')
 def postings(username=""):
     return render_template("postings.html", listings = listings, username=username)
 
-@app.route('/profile/<username>')
-def profile(username=""):
+@app.route('/profile/<username>/<profilename>')
+def profile(username="", profilename=""):
+
     return render_template("profile.html", username = username, data = data)
 
 @app.route('/new/<username>', methods = ["GET", "POST"])
 def new(username=""):
     form = NewPost()
-    
+
     if form.validate_on_submit():
         new_listing = {
             "student": username,
