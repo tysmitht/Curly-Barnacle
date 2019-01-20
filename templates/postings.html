@@ -32,7 +32,13 @@
                   background-color: #4CAF50;
                   color: white;
                 }
-                </style>
+        </style>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        </style>
     </head>
     <body>
         {% if username == "" %}
@@ -52,9 +58,30 @@
               <a href="/about/{{username}}" >About</a>
           </div>
         {% endif %}
-        {% for job in listings %}
-            <h2>{{job.student}} | {{job.rating}} | {{job.subject}} | {{job.pay}} | {{job.location}}</h2>
-        {% endfor %}
 
+        <table style="width:100%">
+        
+            <tr>
+                <th>Name</th>
+                <th>Rating</th>
+                <th>Subject</th>
+                <th>Pay</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Additional Comments</th>
+            </tr>
+
+        {% for job in listings %}
+            <tr>
+                <td>{{job.student}}</td>
+                <td>{{job.rating}}</td>
+                <td>{{job.subject}}</td>
+                <td>{{job.pay}}</td>
+                <td>{{job.date}}</td>
+                <td>{{job.location}}</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+        </table>
     </body>
 </html>

@@ -108,6 +108,7 @@ def profile(username=""):
 @app.route('/new/<username>', methods = ["GET", "POST"])
 def new(username=""):
     form = NewPost()
+    
     if form.validate_on_submit():
         new_listing = {
             "student": username,
@@ -115,7 +116,8 @@ def new(username=""):
             "subject": form.subject.data,
             "pay": form.price.data,
             "location": form.location.data,
-            "date": form.date.data
+            "date": form.date.data,
+            "additional comments": form.comments.data
         }
         listings.append(new_listing)
         return redirect("/home/"+username)
