@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 class RegistrationForm(FlaskForm):
@@ -28,6 +28,28 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 class HomeSearch(FlaskForm):
-    search = StringField("search", 
+    search = StringField("Search", 
         validators=[DataRequired()])
     submit = SubmitField("Search")
+
+class NewPost(FlaskForm):
+    subject = StringField("subject",
+        validators=[DataRequired()])
+
+    price = StringField("price",
+        validators=[DataRequired()])
+
+    location = StringField("location",
+        validators=[DataRequired()])
+        
+    date = DateField("date",
+        validators=[DataRequired()])
+
+    comments = StringField("comments")
+
+    submit = SubmitField("Create Post")
+
+class JobSelection(FlaskForm):
+    choice = StringFiezld("choice",
+        validators=[DataRequired()])
+

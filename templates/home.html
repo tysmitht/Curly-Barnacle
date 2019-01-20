@@ -48,6 +48,7 @@
           <a class="active" href="/home/{{username}}">Home</a>
           <a href = "">Welcome {{username}}</a>
           <a href="/postings/{{username}}">Tutoring Jobs</a>
+          <a href="/new/{{username}}">New Job Post</a>
           <a href="/about/{{username}}" >About</a>
       </div>
       {% endif %}
@@ -56,11 +57,10 @@
           {{ form.hidden_tag() }}
           </br>
           <fieldset>
-            <legend>
-              Search
-            </legend>
-            {{form.search}}
+            Search {{form.search}}
           </fieldset>
-          {{form.submit}}
+          </br>
+          {{form.submit()}}
+        </form>
     </body>
 </html>
