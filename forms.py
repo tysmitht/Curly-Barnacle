@@ -42,7 +42,7 @@ class NewPost(FlaskForm):
     location = StringField("location",
         validators=[DataRequired()])
         
-    date = DateField("date",
+    date = StringField("date",
         validators=[DataRequired()])
 
     comments = StringField("comments")

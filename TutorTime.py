@@ -118,6 +118,7 @@ def new(username=""):
             "date": form.date.data
         }
         listings.append(new_listing)
+        return redirect("/home/"+username)
     return render_template("new.html", form = form, username = username)
 
 
