@@ -50,6 +50,6 @@ class NewPost(FlaskForm):
     submit = SubmitField("Create Post")
 
 class JobSelection(FlaskForm):
-    choice = StringFiezld("choice",
+    choice = StringField("choice",
         validators=[DataRequired()])
 
